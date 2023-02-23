@@ -1,8 +1,6 @@
-import numpy as np
-from PIL import Image
+import toolkit
+from labs.lab_1.task_1 import task_1
 
+task_1()
+# task 2 is in file LabImage.py
 
-def task_1():
-    _H = 12  # height
-    _W = 8  # width
-    mat = 
