@@ -53,7 +53,13 @@ class LabImage:
                 y += 1 if y1 > y0 else -1
                 error -= 1.
 
-    def draw_triangle(self, x0: float, y0: float, x1: float, y1: float, x2: float, y2: float, step=0.01, color=Color(255, 255, 255)):
+    def draw_triangle(self, x0: float, y0: float, x1: float, y1: float, x2: float, y2: float, step=0.01, color=Color(255, 255, 255), magnification=1):
+        x0 *= magnification
+        y0 *= magnification
+        x1 *= magnification
+        y1 *= magnification
+        x2 *= magnification
+        y2 *= magnification
         xmin = min(x0, x1, x2)
         ymin = min(y0, y1, y2)
         xmax = max(x0, x1, x2)
