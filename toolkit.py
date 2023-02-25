@@ -34,3 +34,7 @@ def baricentrical(x: int, y: int, x0: float, y0: float, x1: float, y1: float, x2
     lambda1 = ((x2 - x0) * (y - y0) - (y2 - y0) * (x - x0)) / ((x2 - x0) * (y1 - y0) - (y2 - y0) * (x1 - x0))
     lambda2 = ((x0 - x1) * (y - y1) - (y0 - y1) * (x - x1)) / ((x0 - x1) * (y2 - y1) - (y0 - y1) * (x2 - x1))
     return [lambda0, lambda1, lambda2]
+
+
+def normal(x0, y0, z0, x1, y1, z1, x2, y2, z2):
+    return np.cross(np.array([x1 - x0, y1 - y0, z1 - z0]), np.array([x1 - x2, y1 - y2, z1 - z2]))

@@ -1,8 +1,10 @@
 import collections
 import random
 
+import numpy as np
 import pywavefront
 
+import toolkit
 from LabImage import Color, LabImage
 
 
@@ -15,6 +17,26 @@ class LabModel:
 
     def faces(self) -> collections.Iterable:
         return self.scene.mesh_list[0].faces
+
+    def normals(self) -> collections.Iterable:
+        vertices = self.vertices()
+        result = []
+        for face in self.faces():
+            dot_1_index = face[0]
+            dot_2_index = face[1]
+            dot_3_index = face[2]
+            normal = toolkit.normal(vertices[dot_1_index][0],
+                            vertices[dot_1_index][1],
+                            vertices[dot_1_index][2],
+                            vertices[dot_2_index][0],
+                            vertices[dot_2_index][1],
+                            vertices[dot_2_index][2],
+                            vertices[dot_3_index][0],
+                            vertices[dot_3_index][1],
+                            vertices[dot_3_index][2])
+            result.append(normal)
+        return result
+
 
     def draw_faces(self, image: LabImage, color: Color, magnification=1):
         vertices = self.vertices()
@@ -44,7 +66,6 @@ class LabModel:
     def draw_trianlges(self, image: LabImage, step=0.01, color=None, magnification=1):
         vertices = self.vertices()
         for face in self.faces():
-            print(f'Started face {face}')
             dot_1_index = face[0]
             dot_2_index = face[1]
             dot_3_index = face[2]
