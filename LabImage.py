@@ -23,8 +23,12 @@ class LabImage:
     def set(self, x, y, color: Color):
         self.set_initially(x + (int(self.width / 2)), (-1 * y) + (int(self.height / 2)), color)
 
-    def draw_line(self, x0: int, y0: int, x1: int, y1: int):
+    def draw_line(self, x0: int, y0: int, x1: int, y1: int, color=None, magnification=1):
         steep = False
+        x0 *= magnification
+        x1 *= magnification
+        y0 *= magnification
+        y1 *= magnification
         if abs(x0 - x1) < abs(y0 - y1):
             x0, y0 = y0, x0
             x1, y1 = y1, x1
@@ -34,16 +38,16 @@ class LabImage:
             y0, y1 = y1, y0
         dx = x1 - x0
         dy = y1 - y0
-        derror = abs(dy/dx)
+        derror = abs(dy / dx)
         error = 0
         y = y0
         for x in np.arange(x0, x1):
             t = (x - x0) / (x1 - x0)
             y = y0 * (1. - t) + y1 * t
             if steep:
-                self.set(y, x, Color(100 * t, 100 * t + 50, 100 * t + 100))
+                self.set(y, x, Color(100 * t, 100 * t + 50, 100 * t + 100) if color is None else color)
             else:
-                self.set(x, y, Color(100 * t, 100 * t + 50, 100 * t + 100))
+                self.set(x, y, Color(100 * t, 100 * t + 50, 100 * t + 100) if color is None else color)
             error += derror
             if error > .5:
                 y += 1 if y1 > y0 else -1
