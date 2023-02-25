@@ -1,7 +1,9 @@
 from LabModel import LabModel
 
 
-def task_4():
+def task_6():
     model = LabModel('resources/rabbit.obj')
-    vertices = model.vertices()
-    # print(vertices)
+    faces = model.faces()
+    # print(faces)
+
+
