@@ -2,6 +2,6 @@ from LabModel import LabModel
 
 
 def task_4():
-    model = LabModel('resources/deer.obj')
+    model = LabModel('resources/rabbit.obj')
 
     print(model.scene.vertices)
