@@ -27,3 +27,10 @@ def save_im(data: np.ndarray, task: int, lab: int, number_of_image: int):
     else:
         data = im.fromarray(data).convert('RGB')
     data.save(f'labs/lab_{lab}/results/task_{task}_image_{number_of_image}.png')
+
+
+def baricentrical(x: int, y: int, x0: float, y0: float, x1: float, y1: float, x2: float, y2: float):
+    lambda0 = ((x1 - x2) * (y - y2) - (y1 - y2) * (x - x2)) / ((x1 - x2) * (y0 - y2) - (y1 - y2) * (x0 - x2))
+    lambda1 = ((x2 - x0) * (y - y0) - (y2 - y0) * (x - x0)) / ((x2 - x0) * (y1 - y0) - (y2 - y0) * (x1 - x0))
+    lambda2 = ((x0 - x1) * (y - y1) - (y0 - y1) * (x - x1)) / ((x0 - x1) * (y2 - y1) - (y0 - y1) * (x2 - x1))
+    return [lambda0, lambda1, lambda2]
