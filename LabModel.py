@@ -63,18 +63,24 @@ class LabModel:
                             color,
                             magnification=magnification)
 
-    def draw_trianlges(self, image: LabImage, step=0.01, color=None, magnification=1):
+    def draw_trianlges(self, image: LabImage, step=0.3, color=None, magnification=1):
         vertices = self.vertices()
-        for face in self.faces():
-            dot_1_index = face[0]
-            dot_2_index = face[1]
-            dot_3_index = face[2]
-            image.draw_triangle(vertices[dot_1_index][0],
-                                vertices[dot_1_index][1],
-                                vertices[dot_2_index][0],
-                                vertices[dot_2_index][1],
-                                vertices[dot_3_index][0],
-                                vertices[dot_3_index][1],
-                                step,
-                                Color(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)) if color is None else color,
-                                magnification=magnification)
+        faces = self.faces()
+        normals = self.normals()
+        for i in range(len(faces)):
+            face = faces[i]
+            normal = normals[i]
+            cos = toolkit.find_cos(normal)
+            if cos < 0:
+                dot_1_index = face[0]
+                dot_2_index = face[1]
+                dot_3_index = face[2]
+                image.draw_triangle(vertices[dot_1_index][0],
+                                    vertices[dot_1_index][1],
+                                    vertices[dot_2_index][0],
+                                    vertices[dot_2_index][1],
+                                    vertices[dot_3_index][0],
+                                    vertices[dot_3_index][1],
+                                    step,
+                                    Color(255 * -cos, 0, 0) if color is None else color,
+                                    magnification=magnification)
