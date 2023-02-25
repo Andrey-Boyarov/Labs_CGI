@@ -53,5 +53,24 @@ class LabImage:
                 y += 1 if y1 > y0 else -1
                 error -= 1.
 
+    def draw_triangle(self, x0: float, y0: float, x1: float, y1: float, x2: float, y2: float, step=0.01, color=Color(255, 255, 255)):
+        xmin = min(x0, x1, x2)
+        ymin = min(y0, y1, y2)
+        xmax = max(x0, x1, x2)
+        ymax = max(y0, y1, y2)
+        if xmin < 0 - self.width / 2:
+            xmin = 0 - self.width / 2
+        if ymin < 0 - self.width / 2:
+            ymin = 0 - self.width / 2
+        if xmax > 0 + self.width / 2:
+            xmax = 0 + self.width / 2
+        if ymax > 0 + self.width / 2:
+            ymax = 0 + self.width / 2
+        for y in np.arange(ymin, ymax, step):
+            for x in np.arange(xmin, xmax, step):
+                coordinates = toolkit.baricentrical(x, y, x0, y0, x1, y1, x2, y2)
+                if coordinates[0] > 0 and coordinates[1] > 0 and coordinates[2] > 0:
+                    self.set(x, y, color)
+
     def save(self, lab: int, task: int, number_of_image: int):
         toolkit.save_im(self.data, task, lab, number_of_image)
