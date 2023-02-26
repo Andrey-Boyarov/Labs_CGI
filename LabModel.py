@@ -71,7 +71,7 @@ class LabModel:
             face = faces[i]
             normal = normals[i]
             cos = toolkit.find_cos(normal)
-            if cos >= 0:
+            if cos > 0:
                 dot_1_index = face[0]
                 dot_2_index = face[1]
                 dot_3_index = face[2]
