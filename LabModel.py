@@ -71,16 +71,19 @@ class LabModel:
             face = faces[i]
             normal = normals[i]
             cos = toolkit.find_cos(normal)
-            if cos < 0:
+            if cos <= 0:
                 dot_1_index = face[0]
                 dot_2_index = face[1]
                 dot_3_index = face[2]
-                image.draw_triangle(vertices[dot_1_index][0],
-                                    vertices[dot_1_index][1],
-                                    vertices[dot_2_index][0],
-                                    vertices[dot_2_index][1],
-                                    vertices[dot_3_index][0],
-                                    vertices[dot_3_index][1],
-                                    step,
-                                    Color(255 * -cos, 0, 0) if color is None else color,
+                image.draw_triangle(x0=vertices[dot_1_index][0],
+                                    y0=vertices[dot_1_index][1],
+                                    x1=vertices[dot_2_index][0],
+                                    y1=vertices[dot_2_index][1],
+                                    x2=vertices[dot_3_index][0],
+                                    y2=vertices[dot_3_index][1],
+                                    z0=vertices[dot_1_index][2],
+                                    z1=vertices[dot_2_index][2],
+                                    z2=vertices[dot_3_index][2],
+                                    step=step,
+                                    color=Color(255 * -cos, 0, 0) if color is None else color,
                                     magnification=magnification)

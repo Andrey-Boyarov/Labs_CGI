@@ -12,6 +12,7 @@ from labs.lab_2.task_11 import task_11
 from labs.lab_2.task_12 import task_12
 from labs.lab_2.task_13 import task_13
 from labs.lab_2.task_14 import task_14
+from labs.lab_2.task_15 import task_15
 
 # task_1()
 # task 2 is in file LabImage.py
@@ -25,4 +26,5 @@ from labs.lab_2.task_14 import task_14
 # task_11()
 # task_12()
 # task_13()
-task_14()
+# task_14()
+task_15()
