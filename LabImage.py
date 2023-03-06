@@ -66,7 +66,7 @@ class LabImage:
                 y += 1 if y1 > y0 else -1
                 error -= 1.
 
-    def draw_triangle(self, x0: float, y0: float, x1: float, y1: float, x2: float, y2: float, z0=.0, z1=.0, z2=.0, step=0.01, color=Color(255, 255, 255), magnification=1):
+    def draw_triangle(self, x0: float, y0: float, x1: float, y1: float, x2: float, y2: float, z0=.0, z1=.0, z2=.0, step=0.01, color=Color(255, 255, 255), magnification=1, cos=0):
         x0 *= magnification
         y0 *= magnification
         x1 *= magnification
@@ -90,13 +90,14 @@ class LabImage:
             ymax = 0 + self.width / 2
         for y in np.arange(ymin, ymax, step):
             for x in np.arange(xmin, xmax, step):
+                bar = toolkit.baricentrical(x, y, x0, y0, x1, y1, x2, y2)
                 coordinates = toolkit.baricentrical(x, y, x0, y0, x1, y1, x2, y2)
                 if coordinates[0] > 0 and coordinates[1] > 0 and coordinates[2] > 0:
                     z = coordinates[0]*z0 + coordinates[1]*z1 + coordinates[2]*z2
                     if z < self.get_z_buffer(x, y):
+                        color = Color(int(255*(bar[0]*cos + bar[1]*cos + bar[2]*cos)), 0, 0)
                         self.set(x, y, color)
                         self.set_z_buffer(x, y, float(z))
-                        print(z)
 
     def save(self, lab: int, task: int, number_of_image: int):
         toolkit.save_im(self.data, task, lab, number_of_image)
